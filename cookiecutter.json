@@ -1,3 +1,8 @@
 {
-    
+    "project_title": "FastAPI Cookiecutter Project",
+    "project_slug": "{{ cookiecutter.project_title.lower().replace(' ', '_').replace('-', '_') }}",
+    "project_description": "{{ cookiecutter.project_slug }} description",
+    "author_name": "Your name (or your organization/company/team)",
+    "author_nickname": "{{ cookiecutter.author_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "aws_connector": ["no", "yes"]
 }
