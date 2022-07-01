@@ -1,0 +1,11 @@
+-r ./base.txt
+
+# Debugging
+ipdb==0.13.9
+
+# Testing
+mypy==0.961
+pytest==7.1.2
+
+# Code Quality
+flake8==4.0.1
