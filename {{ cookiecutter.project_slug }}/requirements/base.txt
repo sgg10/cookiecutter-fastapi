@@ -20,7 +20,12 @@ sniffio==1.2.0
 # Uvicorn
 uvicorn==0.18.2
 
-{% if cookiecutter.aws_connector == "yes" %}
+{% if cookiecutter.database == "Postgres" %}
+# Postgres
+psycopg2-binary==2.9.3
+{% endif %}
+
+{% if cookiecutter.cloud_provider == "AWS" %}
 # AWS
 botocore==1.27.21
 boto3==1.24.21
