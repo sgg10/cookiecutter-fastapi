@@ -1,0 +1,46 @@
+version: '3.8'
+
+{% if cookiecutter.database == "Postgres" %}
+volumes:
+  {{ cookiecutter.project_slug }}_local_postgres_data: {}
+  {{ cookiecutter.project_slug }}_local_postgres_data_backup: {}
+{% endif %}
+
+services:
+  fastapi:
+    build:
+      context: .
+      dockerfile: ./compose/local/fastapi/Dockerfile
+    image: {{ cookiecutter.project_slug }}_local_fastapi
+    container_name: {{ cookiecutter.project_slug }}_local_fastapi
+    platform: linux/x86_64
+    {% if cookiecutter.database == "Postgres" %}
+    depends_on:
+      - postgres
+    {% endif %}
+    volumes:
+      - .:/code:z
+    env_file:
+      - ./.envs/.local/.app
+      {% if cookiecutter.database == "Postgres" %}
+      - ./.envs/.local/.postgres
+      {% endif %}
+      {% if cookiecutter.cloud_provider == "AWS" %}
+      - ./.envs/.local/.aws
+      {% endif %}
+    ports:
+      - "8080:8080"
+    command: /start
+  {% if cookiecutter.database == "Postgres" %}
+
+  postgres:
+    image: postgres
+    container_name: {{ cookiecutter.project_slug }}_local_postgres
+    volumes:
+      - {{ cookiecutter.project_slug }}_local_postgres_data:/var/lib/postgresql/data:Z
+      - {{ cookiecutter.project_slug }}_local_postgres_data_backups:/backups:z
+    env_file:
+      - ./.envs/.local/.postgres
+    ports:
+      - "5432:5432"
+  {% endif %}
