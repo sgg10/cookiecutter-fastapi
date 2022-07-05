@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from settings.base import env
-from settings.local import Settings as LocalSettings
-from settings.production import Settings as ProductionSettings
+from app.core.settings.base import env
+from app.core.settings.local import Settings as LocalSettings
+from app.core.settings.production import Settings as ProductionSettings
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent.parent
 
