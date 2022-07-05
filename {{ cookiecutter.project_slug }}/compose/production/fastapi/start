@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -o errexit
+set -o nounset
+
+PROJECT_INTERNAL_PORT=8000
+export PYTHONPATH='/code'
+
+cd $PYTHONPATH
+uvicorn app.main:app --host 0.0.0.0 --port $PROJECT_INTERNAL_PORT
