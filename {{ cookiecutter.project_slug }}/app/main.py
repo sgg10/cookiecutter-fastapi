@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.sample import router as SampleRouter
-import app.core.settings as app_settings
+from app.core.config import settings as app_settings
 
 app = FastAPI(prefix='')
 
